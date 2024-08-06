@@ -3,7 +3,7 @@ import { Accessor, createMemo, createResource, Show } from "solid-js";
 import { useUtensilContext } from "~/components/UtensilProvider";
 import UtensilView from "~/components/UtensilView";
 import { handleToURL } from "~/helpers/files";
-import { computeWinner, generateMatchup } from "~/helpers/matchups";
+import { computeWinners, generateMatchup } from "~/helpers/matchups";
 
 export default function ComparisonView(props: {
 	matchup: readonly [number, number];
@@ -30,8 +30,8 @@ export default function ComparisonView(props: {
 		if (v) return v;
 		return ["", "", "", ""] as [string, string, string, string];
 	});
-	const winner = createMemo(() => {
-		const r = computeWinner(utensilCtx.matchups(), utensilCtx.utensils.length);
+	const winners = createMemo(() => {
+		const r = computeWinners(utensilCtx.matchups(), utensilCtx.utensils.length);
 		return r;
 	});
 	return (
@@ -61,8 +61,10 @@ export default function ComparisonView(props: {
 				/>
 			</div>
 			{(() => {
-				const w = winner();
-				return w !== -1 ? `Fork ${w} is winning` : "No fork is winning";
+				const w = winners();
+				if (w.length === 0) return "No fork is winning";
+				if (w.length === 1) return `Fork ${w[0]} is winning`;
+				return `Forks ${w.join(", ")} are winning`;
 			})()}
 		</>
 	);

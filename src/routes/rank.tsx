@@ -4,7 +4,7 @@ import ComparisonView from "~/components/ComparisonView";
 import { useUtensilContext } from "~/components/UtensilProvider";
 import UtensilView from "~/components/UtensilView";
 import { handleToURL } from "~/helpers/files";
-import { computeWinner, generateMatchup } from "~/helpers/matchups";
+import { computeWinners, generateMatchup } from "~/helpers/matchups";
 
 export default function Rank() {
 	const navigate = useNavigate();
