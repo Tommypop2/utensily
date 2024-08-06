@@ -60,12 +60,14 @@ export default function ComparisonView(props: {
 					}}
 				/>
 			</div>
-			{(() => {
-				const w = winners();
-				if (w.length === 0) return "No fork is winning";
-				if (w.length === 1) return `Fork ${w[0]} is winning`;
-				return `Forks ${w.join(", ")} are winning`;
-			})()}
+			<p class="text-xl">
+				{(() => {
+					const w = winners();
+					if (w.length === 0) return "No fork is winning";
+					if (w.length === 1) return `Fork ${w[0]} is winning`;
+					return `Forks ${w.join(", ")} are winning`;
+				})()}
+			</p>
 		</>
 	);
 }
