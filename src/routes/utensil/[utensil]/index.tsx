@@ -2,9 +2,7 @@ import { Title } from "@solidjs/meta";
 import { useNavigate, useParams } from "@solidjs/router";
 import { onMount } from "solid-js";
 import { useUtensilContext } from "~/components/UtensilProvider";
-import {
-	loadUtensilsFromFiles,
-} from "~/helpers/files";
+import { loadUtensilsFromFiles } from "~/helpers/files";
 import { getUtensils, writeUtensilToOPFS } from "~/helpers/opfs";
 
 export default function Utensil() {
@@ -20,7 +18,7 @@ export default function Utensil() {
 	return (
 		<main class="h-full">
 			<Title>Utensily - {utensil()}</Title>
-			<div class="h-full flex items-center justify-center">
+			<div class="h-full flex items-center justify-center gap-2">
 				<button
 					type="button"
 					class="rounded-1 bg-blue-400 hover:bg-blue-500 h-20 w-30 mt-100 text-dark-800 border-none"
@@ -46,6 +44,7 @@ export default function Utensil() {
 				</button>
 				<button
 					type="button"
+					class="rounded-1 bg-blue-400 hover:bg-blue-500 h-20 w-30 mt-100 text-dark-800 border-none"
 					onClick={async () => {
 						const opfs = await navigator.storage.getDirectory();
 						const utensilDir = await opfs.getDirectoryHandle(utensil());
@@ -55,6 +54,13 @@ export default function Utensil() {
 					}}
 				>
 					Rank!
+				</button>
+				<button
+					type="button"
+					class="rounded-1 bg-blue-400 hover:bg-blue-500 h-20 w-30 mt-100 text-dark-800 border-none"
+					onClick={() => navigate("view")}
+				>
+					View Added Utensils
 				</button>
 			</div>
 		</main>

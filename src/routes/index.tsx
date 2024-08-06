@@ -14,12 +14,13 @@ export default function Home() {
 		for await (const k of keys) cutl.push(k);
 		setCutlery(cutl);
 	});
+	const [newCutleryName, setNewCutleryName] = createSignal<string | null>(null);
 	return (
 		<main class="h-full">
 			<Title>Utensily</Title>
 			<div class="h-full flex flex-col items-center justify-center">
-				Utensily!!
-				<div>
+				My Cutlery Drawer
+				<div class="border-black border border-solid w-50 flex flex-col items-center">
 					<For each={cutlery()}>
 						{(c) => (
 							<button type="button" onClick={() => navigate(`/utensil/${c}`)}>
@@ -28,6 +29,21 @@ export default function Home() {
 						)}
 					</For>
 				</div>
+				<form
+					onSubmit={(e) => {
+						e.stopPropagation();
+						e.preventDefault();
+						console.log("Submitted");
+						if (!newCutleryName()) return;
+						navigate(`/utensil/${newCutleryName()}`);
+					}}
+				>
+					<input
+						placeholder="New utensil"
+						onInput={(e) => setNewCutleryName(e.target.value)}
+					/>
+					<button type="submit">Add utensil</button>
+				</form>
 			</div>
 		</main>
 	);
