@@ -22,6 +22,7 @@ export default function Rank() {
 			<h1 class="text-5xl">Choose your favourite fork!</h1>
 			<ComparisonView matchup={matchup()!} newMatchup={refetch} />
 			<button
+				type="button"
 				class="absolute right-1 bottom-1"
 				onClick={() => navigate("/winner")}
 			>

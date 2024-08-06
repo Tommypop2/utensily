@@ -1,0 +1,23 @@
+{
+	"$schema": "https://biomejs.dev/schemas/1.8.3/schema.json",
+	"formatter": {
+		"enabled": true
+	},
+	"linter": {
+		"enabled": true,
+		"rules": {
+			"suspicious": {
+				"noExplicitAny": "off"
+			},
+			"style": {
+				"noNonNullAssertion": "off"
+			},
+			"a11y": {
+				"useKeyWithClickEvents": "off"
+			}
+		}
+	},
+	"organizeImports": {
+		"enabled": true
+	}
+}

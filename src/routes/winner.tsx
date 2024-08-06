@@ -12,5 +12,5 @@ export default function Winner() {
 	const [src] = createResource(() =>
 		handleToURL(utensilCtx.utensils[winner[0]].top)
 	);
-	return <img src={src()} class="h-200"></img>;
+	return <img src={src()} class="h-200" alt="" />;
 }

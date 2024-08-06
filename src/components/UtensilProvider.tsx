@@ -1,12 +1,11 @@
 import {
-	Accessor,
+	type Accessor,
 	createContext,
-	createEffect,
 	createSignal,
-	ParentProps,
+	type ParentProps,
 	useContext,
 } from "solid-js";
-import { Utensil } from "~/helpers/files";
+import type { Utensil } from "~/helpers/files";
 export type Matchup = {
 	winner: number;
 	loser: number;

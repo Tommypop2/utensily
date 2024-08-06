@@ -7,7 +7,7 @@ export const filterImageHandles = async (
 		if (!file.name.endsWith(".jpg")) continue;
 
 		// Check handle kind
-		if (file.kind != "file") continue;
+		if (file.kind !== "file") continue;
 		images.push(file);
 	}
 	return images;
@@ -31,8 +31,8 @@ export const getUtensils = (handles: FileSystemFileHandle[]) => {
 	const utensils: Utensil[] = [];
 	for (const name of Object.keys(maybeUtensils)) {
 		const { top, side } = maybeUtensils[name];
-		if (!top) throw new Error("Expected top view for " + name);
-		if (!side) throw new Error("Expected side view for " + name);
+		if (!top) throw new Error(`Expected top view for ${name}`);
+		if (!side) throw new Error(`Expected side view for ${name}`);
 		utensils.push({ name, top, side });
 	}
 	return utensils;
