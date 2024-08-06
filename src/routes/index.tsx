@@ -3,7 +3,7 @@ import { useNavigate } from "@solidjs/router";
 import { createSignal, onMount } from "solid-js";
 import { useUtensilContext } from "~/components/UtensilProvider";
 import { filterImageHandles, getUtensils, handleToURL } from "~/helpers/files";
-
+// TODO: Move IndexedDB code into root or context provider
 export default function Home() {
 	const utensilCtx = useUtensilContext();
 	const navigate = useNavigate();
@@ -46,6 +46,7 @@ export default function Home() {
 						req.onupgradeneeded = () => {
 							const db = req.result;
 							const handles = db.createObjectStore("handlers");
+              handles.clear();
 							handles.put(handle, "handle");
 						};
 						loadFiles(handle);
