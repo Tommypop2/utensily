@@ -3,6 +3,7 @@ import { useNavigate } from "@solidjs/router";
 import { createSignal, onMount } from "solid-js";
 import { useUtensilContext } from "~/components/UtensilProvider";
 import { filterImageHandles, getUtensils, handleToURL } from "~/helpers/files";
+import { loadHandle, saveHandle } from "~/helpers/indexedDb";
 // TODO: Move IndexedDB code into root or context provider
 export default function Home() {
 	const utensilCtx = useUtensilContext();
@@ -17,19 +18,8 @@ export default function Home() {
 	};
 	onMount(async () => {
 		// Try to load from IndexedDB
-		const req = indexedDB.open("Db");
-		req.onsuccess = async () => {
-			const items = req.result
-				.transaction("handlers")
-				.objectStore("handlers")
-				.get("handle");
-			items.onsuccess = async () => {
-				const res = items.result as FileSystemDirectoryHandle;
-				if ((await res.requestPermission()) === "granted") {
-					loadFiles(res);
-				}
-			};
-		};
+		const handle = await loadHandle();
+		loadFiles(handle);
 	});
 	return (
 		<main class="h-full">
@@ -42,13 +32,7 @@ export default function Home() {
 						const handle = await window.showDirectoryPicker({
 							mode: "readwrite",
 						});
-						const req = indexedDB.open("Db", 2);
-						req.onupgradeneeded = () => {
-							const db = req.result;
-							const handles = db.createObjectStore("handlers");
-              handles.clear();
-							handles.put(handle, "handle");
-						};
+						saveHandle(handle);
 						loadFiles(handle);
 					}}
 				>
