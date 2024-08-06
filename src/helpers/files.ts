@@ -19,7 +19,7 @@ export type Utensil = {
 	top: FileSystemFileHandle;
 	side: FileSystemFileHandle;
 };
-export const getUtensils = (handles: FileSystemFileHandle[]) => {
+export const getFileSystemUtensils = (handles: FileSystemFileHandle[]) => {
 	const maybeUtensils: Record<
 		string,
 		{ top?: FileSystemFileHandle; side?: FileSystemFileHandle }
@@ -37,6 +37,14 @@ export const getUtensils = (handles: FileSystemFileHandle[]) => {
 		if (!side) throw new Error(`Expected side view for ${name}`);
 		utensils.push({ name, top, side });
 	}
+	return utensils;
+};
+export const loadUtensilsFromFiles = async (handle: FileSystemDirectoryHandle) => {
+	const vals = handle.values();
+	if (!vals) return;
+	const imageHandles = await filterImageHandles(vals);
+	const utensils = getFileSystemUtensils(imageHandles);
+	// navigate("/rank");
 	return utensils;
 };
 export const handleToURL = async (handle: FileSystemFileHandle) => {

@@ -1,7 +1,7 @@
 export default function UtensilView(props: {
 	top?: string;
 	side?: string;
-	onClick: () => any;
+	onClick?: () => any;
 }) {
 	return (
 		<div class="flex flex-row" onClick={props.onClick}>
