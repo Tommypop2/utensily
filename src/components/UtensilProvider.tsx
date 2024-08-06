@@ -11,6 +11,7 @@ export type Matchup = {
 	loser: number;
 };
 export type UtensilData = {
+	utensilName: { singular: string; plural: string };
 	utensils: Utensil[];
 	matchups: Accessor<Matchup[]>;
 	addMatchup(m: Matchup): void;
@@ -21,6 +22,7 @@ export const UtensilProvider = (props: ParentProps) => {
 	return (
 		<UtensilContext.Provider
 			value={{
+				utensilName: { singular: "fork", plural: "forks" },
 				utensils: [],
 				matchups,
 				addMatchup(m) {

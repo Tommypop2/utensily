@@ -4,6 +4,7 @@ import { useUtensilContext } from "~/components/UtensilProvider";
 import UtensilView from "~/components/UtensilView";
 import { handleToURL } from "~/helpers/files";
 import { computeWinners, generateMatchup } from "~/helpers/matchups";
+import { capitalise } from "~/helpers/strings";
 
 export default function ComparisonView(props: {
 	matchup: readonly [number, number];
@@ -63,9 +64,11 @@ export default function ComparisonView(props: {
 			<p class="text-xl">
 				{(() => {
 					const w = winners();
-					if (w.length === 0) return "No fork is winning";
-					if (w.length === 1) return `Fork ${w[0]} is winning`;
-					return `Forks ${w.join(", ")} are winning`;
+					const { singular, plural } = utensilCtx.utensilName;
+					if (w.length === 0) return `No ${singular} is winning`;
+					if (w.length === 1)
+						return `${capitalise(singular)} ${w[0]} is winning`;
+					return `${capitalise(plural)} ${w.join(", ")} are winning`;
 				})()}
 			</p>
 		</>

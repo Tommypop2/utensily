@@ -19,7 +19,7 @@ export default function Rank() {
 	);
 	return (
 		<div class="w-full h-full flex flex-col items-center">
-			<h1 class="text-5xl">Choose your favourite fork!</h1>
+			<h1 class="text-5xl">Choose your favourite {utensilCtx.utensilName.singular}!</h1>
 			<ComparisonView matchup={matchup()!} newMatchup={refetch} />
 			<button
 				type="button"
