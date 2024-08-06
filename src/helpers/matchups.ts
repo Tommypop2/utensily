@@ -12,14 +12,14 @@ export const generateMatchup = (n: number) => {
 	while (r2 === r1) r2 = genRandom(n);
 	return [r1, r2] as const;
 };
-const indexesOf = <T,>(arr: T[], item: T) => {
+const indexesOf = <T>(arr: T[], item: T) => {
 	const indices = [];
 	for (let i = 0; i < arr.length; i++) {
-		const v = arr[i]
-		if (v === item) indices.push(i)
+		const v = arr[i];
+		if (v === item) indices.push(i);
 	}
-	return indices
-}
+	return indices;
+};
 export const computeWinners = (matchups: Matchup[], n: number) => {
 	// Array representing each utensil.
 	const utensils = Array(n).fill(0);
@@ -29,6 +29,6 @@ export const computeWinners = (matchups: Matchup[], n: number) => {
 	}
 	const max = Math.max(...utensils);
 	if (max === 0) return [];
-	const u = indexesOf(utensils, max)
+	const u = indexesOf(utensils, max);
 	return u;
 };

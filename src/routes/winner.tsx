@@ -7,10 +7,10 @@ export default function Winner() {
 	const utensilCtx = useUtensilContext();
 	const winner = computeWinners(
 		utensilCtx.matchups(),
-		utensilCtx.utensils.length
+		utensilCtx.utensils.length,
 	);
 	const [src] = createResource(() =>
-		handleToURL(utensilCtx.utensils[winner[0]].top)
+		handleToURL(utensilCtx.utensils[winner[0]].top),
 	);
 	return <img src={src()} class="h-200" alt="" />;
 }

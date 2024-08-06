@@ -1,5 +1,7 @@
 export const filterImageHandles = async (
-	files: AsyncIterableIterator<FileSystemDirectoryHandle | FileSystemFileHandle>
+	files: AsyncIterableIterator<
+		FileSystemDirectoryHandle | FileSystemFileHandle
+	>,
 ) => {
 	const images: FileSystemFileHandle[] = [];
 	for await (const file of files) {

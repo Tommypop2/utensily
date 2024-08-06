@@ -15,7 +15,7 @@ export default function Rank() {
 	}
 	const [matchup, { refetch }] = createResource(
 		() => generateMatchup(utensilCtx.utensils.length),
-		{ ssrLoadFrom: "initial" }
+		{ ssrLoadFrom: "initial" },
 	);
 	return (
 		<div class="w-full h-full flex flex-col items-center">
