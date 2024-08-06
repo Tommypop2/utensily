@@ -21,6 +21,7 @@ export const computeWinner = (matchups: Matchup[], n: number) => {
 		utensils[m.winner]++;
 	}
 	const max = Math.max(...utensils);
+	if (max === 0) return -1;
 	const u = utensils.indexOf(max);
 	return u;
 };
